@@ -1,88 +1,44 @@
 #include "sort.h"
+#include <stdio.h>
+#include <stdlib.h>
 /**
- * a_swap - swaps two numbers in an array
- * @array: the array to be sorted
- * @index: index in which are the numbers to be swapped
- * Return: always void
- **/
-void a_swap(int *array, unsigned int index)
-{
-    int tmp = array[index];
-
-    array[index] = array[index + 1];
-    array[index + 1] = tmp;
-}
-
+ * sorted - verify is array is sorted
+ * @array: pontier to array to analice
+ * @size: size  of the array
+ */
+ int sorted(int *array, size_t size)
+ {
+	int  i = 0;
+	for (i=0; (size_t)i < size-1; i++)
+	{
+		if (array[i] > array[i+1])
+			return 1;
+	}
+	return 0;
+ }
 /**
- * sorted_nums - counts the numbers that were already sorted
- * at the end of the array
- * @array: the array to be sorted
- * @unsorted_nums: the amount of numbers that have not
- * been sorted at the moment
- * Return: the amount of numbers that have already been sorted
- **/
-unsigned int sorted_nums(int *array, unsigned int unsorted_nums)
-{
-    unsigned int total_to_sub = 0, index = unsorted_nums;
-
-    if (!(array))
-        return 0;
-
-    /* The array will be traversed from the end to the beginning, */
-    /* so the index will be decremented with each iteration */
-    while (array)
-    {
-        /*If index - 1 exists and if it is less than the current index, do...*/
-        if (array[index - 1] && array[index] > array[index - 1])
-        {
-            total_to_sub++;
-            continue;
-        }
-        else
-            break;
-        index--;
-    }
-    return total_to_sub;
-}
-
-/**
- * bubble_sort - sorts an array of integers in ascending order
- * using the Bubble sort algorithm
- * @array: the array to be sorted
- * @size: size of the array
- * Return: always void
- **/
+ *
+ *
+ */
 void bubble_sort(int *array, size_t size)
 {
-    unsigned int i, unsorted_nums = size;
+	int i = 0, tmp = 0, unsorted = 1,  sub = size-1; /* 1 */
 
-    if (size < 2)
-        return;
-
-    /* unsorted_nums will decrement as numbers are sorted  */
-    while (unsorted_nums != 0)
-    {
-        /*Scrolls the array until there are no more numbers left to be sorted*/
-        for (i = 0; i <= unsorted_nums; i++)
-        {
-            /* If there is a following position do... */
-            if (array[i + 1] && i < unsorted_nums)
-            {
-                /* Is the current number greater than the next number? */
-                if (array[i] > array[i + 1])
-                {
-                    /* Swap both numbers and print */
-                    a_swap(array, i);
-                    print_array(array, size);
-                }
-            }
-            /* At this point we are "at the end of the array" */
-            else
-            {
-                /* Subtract how many numbers have been sorted */
-                unsorted_nums -= (sorted_nums(array, unsorted_nums));
-            }
-        }
-    }
-    return;
+	while (unsorted) /* n² */
+	{
+		i = 0;
+		while(i < sub && array[i + 1]) /* n² */
+		{
+			if (array[i] > array [i + 1]) /* n² */
+			{
+				tmp = array[i]; /* n² */
+				array[i] = array[i + 1]; /* n² */
+				array[i + 1] = tmp; /* n² */
+				print_array(array, size); /* n² */
+			}
+			i++; /* n² */
+		}
+		sub--; /* n */
+		unsorted = sorted(array, size); /* n */
+	}
 }
