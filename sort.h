@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define SORTED 0
+#define UNSORTED 1
+
 /* DATA STRUCTURE */
 /**
  * struct listint_s - Doubly linked list node
