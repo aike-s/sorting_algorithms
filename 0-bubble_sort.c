@@ -5,12 +5,12 @@
  * @index: index in which are the numbers to be swapped
  * Return: always void
  **/
-void a_swap(int **array, unsigned int index)
+void a_swap(int *array, unsigned int index)
 {
-    int tmp = *array[index];
+    int tmp = array[index];
 
-    *array[index] = *array[index + 1];
-    *array[index + 1] = tmp;
+    array[index] = array[index + 1];
+    array[index + 1] = tmp;
 }
 
 /**
@@ -60,19 +60,19 @@ void bubble_sort(int *array, size_t size)
         return;
 
     /* unsorted_nums will decrement as numbers are sorted  */
-    while (unsorted_nums > 0)
+    while (unsorted_nums != 0)
     {
         /*Scrolls the array until there are no more numbers left to be sorted*/
         for (i = 0; i <= unsorted_nums; i++)
         {
             /* If there is a following position do... */
-            if (array[i + 1])
+            if (array[i + 1] && i < unsorted_nums)
             {
                 /* Is the current number greater than the next number? */
                 if (array[i] > array[i + 1])
                 {
                     /* Swap both numbers and print */
-                    a_swap(&array, i);
+                    a_swap(array, i);
                     print_array(array, size);
                 }
             }
