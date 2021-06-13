@@ -6,30 +6,30 @@
 void insertion_sort_list(listint_t **list)
 {
     /* declaration of vars */
-    listint_t *current = NULL, *anterior=NULL;
+    listint_t *current_node = NULL, *previous_node=NULL;
     int tmp = 0;
 
     /* node to roam the list */
-    current = *list;
+    current_node = *list;
     /*loop to roam the list (loop forward)*/
-    for (;current->next != NULL; current=current->next)
+    for (;current_node->next != NULL; current_node=current_node->next)
     {
         /* change condition (fordward ->)*/
-        if (current->n > current->next->n)
+        if (current_node->n > current_node->next->n)
         {
-            tmp = current->next->n;
-            current->next->n = current->n;
-            current->n = tmp;
+            tmp = current_node->next->n;
+            current_node->next->n = current_node->n;
+            current_node->n = tmp;
 	        print_list(*list);
 
             /* loop to change the minor elements (loop backward <-) */
-            for (anterior = current; anterior->n < anterior->prev->n; anterior = anterior->prev)
+            for (previous_node = current_node; previous_node->n < previous_node->prev->n; previous_node = previous_node->prev)
             {
-                tmp = anterior->prev->n;
-                anterior->prev->n = anterior->n;
-                anterior->n = tmp;
+                tmp = previous_node->prev->n;
+                previous_node->prev->n = previous_node->n;
+                previous_node->n = tmp;
                 print_list(*list);
-                if (anterior->prev == NULL)
+                if (previous_node->prev == NULL)
                     break;
             }
 
