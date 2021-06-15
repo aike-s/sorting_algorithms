@@ -21,7 +21,6 @@ int check_sorted(int *array, size_t size)
 	/* If I got this far, the array is sorted :) */
 	return (SORTED);
 }
-
 /**
  *
  *
@@ -31,9 +30,6 @@ void quick_sort(int *array, size_t size)
 {
 	int tmp = 0, pivot = 0, index = 0, unsorted = 1, loop = 0;
 	pivot = size - 1;  /* el Pivote es la primera  posicion*/
-
-	printf("este es el pivot inicial %d\n", pivot);
-	printf("este es el index inicial %d\n", index);
 
 	/* este ciclo revisa desde la posision mas a la izquierda hacia la derecha */
 	while(unsorted)
@@ -79,14 +75,6 @@ void quick_sort(int *array, size_t size)
 			else
 				index++;
 		}
-
-
 	unsorted = check_sorted(array, size);
-	//printf("unsorted %d\n", unsorted);
-	loop++;
-
 	}
-
-printf("este es el pivot final %d\n", pivot);
-printf("este es el index final %d\n", index);
 }
