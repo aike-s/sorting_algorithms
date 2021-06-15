@@ -28,7 +28,7 @@ int check_sorted(int *array, size_t size)
  */
 void quick_sort(int *array, size_t size)
 {
-	int tmp = 0, pivot = 0, index = 0, unsorted = 1, loop = 0;
+	int tmp = 0, pivot = 0, index = 0, unsorted = 1;
 	pivot = size - 1;  /* el Pivote es la primera  posicion*/
 
 	/* este ciclo revisa desde la posision mas a la izquierda hacia la derecha */
