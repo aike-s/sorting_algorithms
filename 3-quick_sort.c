@@ -1,80 +1,61 @@
 #include "sort.h"
-/**
- * check_sorted - verify if the array is sorted
- * @array: the array to be sorted
- * @size: size  of the array
- * Return: 0 on success 1 otherwise
- */
-int check_sorted(int *array, size_t size)
-{
-	int  i = 0;
 
-	for (i = 0; (size_t)i < size - 1; i++)
+/**
+ * sub_quick_sort -
+ * @array:
+ * @position1:void quick_sort(int *array, size_t size);
+ * @position2:
+ * @size:
+ * @p_size:
+ **/
+void sub_quick_sort(int *array, int black_hat, int red_hat, int size,
+size_t p_size)
+{
+
+if (!(array) || size < 2)
+	return;
+while (black_hat != red_hat)
+{
+	if (black_hat < red_hat)
 	{
-		/* Is the current number greater than the next number? */
-		if (array[i] > array[i + 1])
+		if (array[black_hat] > array[red_hat])
 		{
-			/* Means that the array is not yet sorted */
-			return (UNSORTED);
+			SWAP(array[black_hat], array[red_hat], int);
+			SWAP(black_hat, red_hat, int);
+			print_array(array, p_size);
+			red_hat++;
 		}
+		else
+			red_hat--;
 	}
-	/* If I got this far, the array is sorted :) */
-	return (SORTED);
+
+	else if (black_hat > red_hat)
+	{
+		if (array[black_hat] < array[red_hat])
+		{
+			SWAP(array[black_hat], array[red_hat], int);
+			SWAP(black_hat, red_hat, int);
+			print_array(array, p_size);
+			red_hat--;
+		}
+		else
+			red_hat++;
+	}
+}
+
+sub_quick_sort(array,  black_hat - 1,  0, black_hat, p_size);
+sub_quick_sort(array, (p_size - 1), (black_hat + 1),
+(size - black_hat - 1), p_size);
 }
 /**
- *
- *
- *
- */
+ * quick_sort -  sorts an array of integers in ascending order
+ * using the Quick sort algorithm
+ * @array: the array to be check_sorted
+ * @size: size of the array
+ * Return: always void
+ **/
 void quick_sort(int *array, size_t size)
 {
-	int tmp = 0, pivot = 0, index = 0, unsorted = 1;
-	pivot = size - 1;  /* el Pivote es la primera  posicion*/
 
-	/* este ciclo revisa desde la posision mas a la izquierda hacia la derecha */
-	while(unsorted)
-	{
-		if(pivot == index && pivot != 0)
-		{
-			index = 0;
-			pivot--;
-		}
-		if(pivot == 0 && index == 0)
-		{
-			index = 0;
-			pivot = size - 1;
-		}
-		while (index < pivot && pivot != 0)
-		{
-			if(array[index] > array[pivot])
-			{
-				tmp = array[index];
-				array[index] = array[pivot];
-				array[pivot] = tmp;
-				tmp = pivot;
-				pivot = index;
-				index = tmp;
-				print_array(array, size);
-				/* loop para recorrer hacia  la derechas */
-				while (pivot < index)
-				{
-					if(array[index]< array[pivot])
-					{
-						tmp = array[index];
-						array[index] = array[pivot];
-						array[pivot] = tmp;
-						tmp = pivot;
-						pivot = index;
-						index = tmp;
-						print_array(array, size);
-					}
-					else
-						index--;
-				}
-			}
-			else
-				index++;
-		}
-	unsorted = check_sorted(array, size);
-	}
+	sub_quick_sort(array, (int)size-1, 0, (int)size, size);
 }
