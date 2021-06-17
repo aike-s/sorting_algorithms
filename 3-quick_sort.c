@@ -61,6 +61,5 @@ sub_quick_sort(array, (p_size - 1), (black_hat + 1),
  **/
 void quick_sort(int *array, size_t size)
 {
-
 	sub_quick_sort(array, (int)size - 1, 0, (int)size, size);
 }
